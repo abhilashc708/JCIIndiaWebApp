@@ -1,0 +1,17 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.jci.india.web.app.dto.FileStorageProperties",
+      "name": "file",
+      "type": "com.jci.india.web.app.dto.FileStorageProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.jci.india.web.app.dto.FileStorageProperties",
+      "name": "file.upload-dir",
+      "type": "java.lang.String"
+    }
+  ]
+}
