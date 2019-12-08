@@ -4,12 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,6 +26,7 @@ public class Loan {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="loan_id")
 	private Long loanId;
 
 	private String region;
@@ -52,11 +55,12 @@ public class Loan {
 
 	private Double rate;
 
-	@OneToMany(mappedBy="loan", fetch = FetchType.LAZY,
+	@OneToMany(fetch = FetchType.LAZY,
 			 cascade = {
 		                CascadeType.PERSIST,
 		                CascadeType.MERGE
-		            })
+		            }, orphanRemoval=true)
+	@JoinColumn(name="loan_id", referencedColumnName="loan_id")
 	private List<Images> images;
 
 	public Loan() {}
@@ -179,7 +183,14 @@ public class Loan {
 	}
 
 	public void setImages(List<Images> images) {
-		this.images = images;
-	}
+		  if (this.images == null) {
+	            this.images = images;
+	        } else if(this.images != images) { 
+	        	this.images.clear();
+	            if(images != null){
+	                this.images.addAll(images);
+	            }
+	        }	
+		  }
 
 }

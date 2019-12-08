@@ -1,6 +1,7 @@
 package com.jci.india.web.app.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -13,8 +14,6 @@ import javax.persistence.Table;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-
 @Entity
 @Table(name = "images")
 @EntityListeners(AuditingEntityListener.class)
@@ -22,15 +21,22 @@ public class Images {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="image_id")
 	private Long imageId;
 
 	private String name;
+	
+	@Column(name="loan_id")
+	private Long loanId;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Loan.class,  cascade = CascadeType.ALL)
-	@JoinColumn(name="loanId", referencedColumnName = "loanId", nullable=false)
-	private Loan loan;
+	/*@ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+	@JoinColumn(name="loanId", referencedColumnName = "loan_id", insertable = false, updatable = false)
+	private Loan loan;*/
 
 	public Images() {}
+	public Images(String name) {
+		this.name = name;
+	}
 
 	public Long getImageId() {
 		return imageId;
@@ -48,13 +54,23 @@ public class Images {
 		this.name = name;
 	}
 
-	public Loan getLoan() {
+	public Long getLoanId() {
+		return loanId;
+	}
+
+	public void setLoanId(Long loanId) {
+		this.loanId = loanId;
+	}
+	
+	
+
+	/*public Loan getLoan() {
 		return loan;
 	}
 
 	public void setLoan(Loan loan) {
 		this.loan = loan;
-	}
+	}*/
 
 
 }

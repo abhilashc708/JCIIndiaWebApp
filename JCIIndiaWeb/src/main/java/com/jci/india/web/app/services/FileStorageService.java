@@ -76,7 +76,7 @@ public class FileStorageService {
 	    public String storeFileInAPath(MultipartFile file) {
 	    	String fileName = storeFile(file);
 
-			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/")
+			String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/downloadFile/")
 					.path(fileName).toUriString();
 			return fileDownloadUri;
 		}
