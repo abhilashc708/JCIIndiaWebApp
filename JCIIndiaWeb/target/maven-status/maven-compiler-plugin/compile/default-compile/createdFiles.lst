@@ -8,6 +8,7 @@ com\jci\india\web\app\message\response\ResponseMessage.class
 com\jci\india\web\app\controller\ContactController.class
 com\jci\india\web\app\dto\ImageDTO.class
 com\jci\india\web\app\config\SwaggerConfig.class
+com\jci\india\web\app\util\GeneratePdfReport.class
 com\jci\india\web\app\exceptions\FileStorageException.class
 com\jci\india\web\app\security\jwt\JwtAuthEntryPoint.class
 com\jci\india\web\app\security\jwt\JwtProvider.class

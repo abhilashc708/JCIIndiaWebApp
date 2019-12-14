@@ -1,5 +1,8 @@
 package com.jci.india.web.app.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +11,9 @@ import javax.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jci.india.web.app.dto.LoanDTO;
 import com.jci.india.web.app.model.Loan;
 import com.jci.india.web.app.services.LoanServiceImpl;
+import com.jci.india.web.app.util.GeneratePdfReport;
 
 @RestController
 @RequestMapping("/api")
@@ -123,5 +129,23 @@ public class LoanController {
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 	}
+	
+	
+	@GetMapping(value = "/loan/pdfreport", produces = MediaType.APPLICATION_PDF_VALUE)
+	    public ResponseEntity<InputStreamResource> loanReport() throws MalformedURLException, IOException {
+
+	        List<Loan> loans = (List<Loan>) loanServiceImpl.findAll();
+
+	        ByteArrayInputStream bis = GeneratePdfReport.loanReport(loans);
+
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.add("Content-Disposition", "inline; filename=loanreport.pdf");
+
+	        return ResponseEntity
+	                .ok()
+	                .headers(headers)
+	                .contentType(MediaType.APPLICATION_PDF)
+	                .body(new InputStreamResource(bis));
+	    }
 	
 }
