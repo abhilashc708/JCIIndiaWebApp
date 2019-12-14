@@ -125,7 +125,8 @@
 								<artifactItem>
 									<groupId>com.gihub.jsimone</groupId>
 									<artifactId>webapp-runner</artifactId>
-									<version>8.0.30.2</version>
+									<version>8.5.11.3</version>
+									<scope>provided</scope>
 									<destFileName>webapp-runner.jar</destFileName>
 								</artifactItem>
 							</artifactItems>
