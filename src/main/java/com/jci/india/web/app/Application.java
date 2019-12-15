@@ -7,8 +7,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import com.jci.india.web.app.dto.FileStorageProperties;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 
 @SpringBootApplication
+@EnableSwagger2
 @EnableJpaAuditing
 @EnableConfigurationProperties({
     FileStorageProperties.class
