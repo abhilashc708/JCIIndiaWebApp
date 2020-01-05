@@ -24,7 +24,8 @@ import com.jci.india.web.app.services.UserDetailsServiceImpl;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-		prePostEnabled = true
+		prePostEnabled = true,
+		proxyTargetClass=true
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 @Autowired
